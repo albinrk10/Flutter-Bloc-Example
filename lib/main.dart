@@ -1,6 +1,7 @@
 import 'package:blocs_app/presentation/screens/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'config/config.dart';
 import 'presentation/bloc/bloc.dart';
 
 
@@ -18,6 +19,7 @@ class BlocProviders extends StatelessWidget {
       providers: [
         //Usamos lazy false para que inicie todos lo bloc al iniciar la app, true en caso contrario
        BlocProvider(create: (context) => UsernameCubit(),lazy: false,),
+        BlocProvider(create: (context) => RouterSimpleCubit()),
       ], 
       child: const App()
     );
