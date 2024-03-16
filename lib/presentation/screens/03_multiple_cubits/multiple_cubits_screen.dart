@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../bloc/bloc.dart';
 
 
@@ -10,6 +9,7 @@ class MultipleCubitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterCubit = context.watch<CounterCubit>();
+    final themeCubit = context.watch<ThemeCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Multiple Cubits'),
@@ -20,9 +20,12 @@ class MultipleCubitScreen extends StatelessWidget {
             const Spacer(flex: 1,),
 
             IconButton(
-              // icon: const Icon( Icons.light_mode_outlined, size: 100 ),
-              icon: const Icon( Icons.dark_mode_outlined, size: 100 ),
-              onPressed: () {},
+              icon: themeCubit.state.isDarkmode 
+              ? const Icon( Icons.light_mode_outlined, size: 100 )
+              : const Icon( Icons.dark_mode_outlined, size: 100 ),
+              onPressed: () {
+                themeCubit.toggleTheme();
+              },
             ),
 
             const Text('Fernando Herrera', style: TextStyle(fontSize: 25 )),
