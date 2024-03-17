@@ -5,6 +5,7 @@ import 'config/config.dart';
 import 'presentation/bloc/bloc.dart';
 
 void main() {
+  serviceLocatorInit();
   runApp(const BlocProviders());
 }
 
@@ -16,12 +17,12 @@ class BlocProviders extends StatelessWidget {
     return MultiBlocProvider(providers: [
       //Usamos lazy false para que inicie todos lo bloc al iniciar la app, true en caso contrario
       BlocProvider(
-        create: (context) => UsernameCubit(),
-        lazy: false,
+        create: (context) => getIt<UsernameCubit>(),
+        // lazy: false,
       ),
-      BlocProvider(create: (context) => RouterSimpleCubit()),
-      BlocProvider(create: (context) => CounterCubit()),
-      BlocProvider(create: (context) => ThemeCubit()),
+      BlocProvider(create: (context) => getIt<RouterSimpleCubit>()),
+      BlocProvider(create: (context) => getIt<CounterCubit>()),
+      BlocProvider(create: (context) => getIt<ThemeCubit>()),
     ], child: const App());
   }
 }
