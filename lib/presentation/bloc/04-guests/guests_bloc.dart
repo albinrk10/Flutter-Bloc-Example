@@ -1,37 +1,42 @@
 import 'package:bloc/bloc.dart';
+import 'package:blocs_app/config/helpers/random_generator.dart';
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 import '../../../domain/domain.dart';
 part 'guests_event.dart';
 part 'guests_state.dart';
 
+const uuid = Uuid();
+
 class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
-  GuestsBloc() : super(const GuestsState()) {
-    on<SetInvitedFilterEvent>((event, emit) {
-      emit(state.copyWith(filter: GuestFilter.invited));
-    });
-
-    on<SetNoInvitedFilterEvent>((event, emit) {
-      emit(state.copyWith(filter: GuestFilter.noInvited));
-    });
-
-    on<SetAllFilterEvent>((event, emit) {
-      emit(state.copyWith(filter: GuestFilter.all));
+  GuestsBloc()
+      : super(GuestsState(guests: [
+          Todo(
+              id: uuid.v4(),
+              description: RandomGenerator.getRandomName(),
+              completedAt: null),
+          Todo(
+              id: uuid.v4(),
+              description: RandomGenerator.getRandomName(),
+              completedAt: null),
+          Todo(
+              id: uuid.v4(),
+              description: RandomGenerator.getRandomName(),
+              completedAt: DateTime.now()),
+          Todo(
+              id: uuid.v4(),
+              description: RandomGenerator.getRandomName(),
+              completedAt: null),
+          Todo(
+              id: uuid.v4(),
+              description: RandomGenerator.getRandomName(),
+              completedAt: DateTime.now()),
+        ])) {
+    on<SetCustomFilterEvent>((event, emit) {
+      emit(state.copyWith(filter: event.newFilter));
     });
   }
-  void changerFilter(GuestFilter newFilter) {
-    
-    switch (newFilter) {
-      case GuestFilter.all:
-        add(SetAllFilterEvent());
-        break;
-
-      case GuestFilter.invited:
-        add(SetAllFilterEvent());
-        break;
-
-      case GuestFilter.noInvited:
-        add(SetAllFilterEvent());
-        break;
-    }
+  void changeFilter(GuestFilter newFilter) {
+    add(SetCustomFilterEvent(newFilter));
   }
 }
