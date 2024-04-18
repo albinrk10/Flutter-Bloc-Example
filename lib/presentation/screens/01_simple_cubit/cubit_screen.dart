@@ -1,4 +1,3 @@
-import 'package:blocs_app/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/bloc.dart';
@@ -8,7 +7,7 @@ class CubitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usernameCubit = context.watch<UsernameCubit>();
+    // final usernameCubit = context.watch<UsernameCubit>();
     // print('CubitScreen: build');
     return Scaffold(
       appBar: AppBar(
