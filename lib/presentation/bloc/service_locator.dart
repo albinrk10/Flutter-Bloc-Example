@@ -9,5 +9,7 @@ void serviceLocatorInit() {
   getIt.registerSingleton(CounterCubit());
   getIt.registerSingleton(ThemeCubit());
   getIt.registerSingleton(GuestsBloc());
-  getIt.registerSingleton(PokemonBloc());
+  getIt.registerSingleton(PokemonBloc(
+    fetchPokemon: PokemonInformation.getPokemonName,
+  ));
 }

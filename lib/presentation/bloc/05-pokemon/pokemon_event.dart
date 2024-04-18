@@ -11,10 +11,10 @@ class PokemonAdded extends PokemonEvent {
   final int id;
   final String name;
 
-  const PokemonAdded({
-    required this.id,
-    required this.name,
-  });
+  const PokemonAdded(
+   this.id,
+   this.name,
+  );
 
   @override
   List<Object> get props => [id, name];
